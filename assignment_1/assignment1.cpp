@@ -9,6 +9,7 @@ A yearsOld and monthsOld calculator
 
 #include <time.h>
 #include <iostream>
+#include <cmath>
 
 #include "assignment1.h"
 
@@ -242,9 +243,9 @@ int yearsOld(int currentYear,int currentMonth,int currentDay,
     // cout << "You are " << years << "\n";
     // cout << "In this year you will be " << timePtr->tm_year - (i - 1900) << "\n";
     return years;
-}
+    }
 
-    int monthsOld(int currentYear,int currentMonth,int currentDay,
+int monthsOld(int currentYear,int currentMonth,int currentDay,
     int birthYear,int birthMonth,int birthDay) {
     // time_t currentTime;
     int months;
@@ -259,30 +260,63 @@ int yearsOld(int currentYear,int currentMonth,int currentDay,
     // cout << "Please enter your year and month of birth (dd/mm/yyyy): ";
     // scanf("%d/%d/%d", &birthDay, &birthMonth, &birthYear);
     months = (currentYear - birthYear) * 12 + (currentMonth - birthMonth - 1);
-    if (currentDay > birthDay) {
-        months += 1; }
+        if (currentDay > birthDay) {
+            months += 1; }
     // cout << "You are " << months << "months old.\n";
     return months;
     }
 
-    int dayOfTheWeek(int birthYear,int birthMonth,int birthDay) {
-        // using Zeller's rule
-        int dayofbirth;
-        int f, d, c, m;
-        cout << "Please enter your day of birth (1 for Monday, etc.): ";
-        scanf("%d", &dayofbirth);
-        d = birthYear % 100;
-        c = birthYear / 100;
-        m = (birthMonth + 10) % 13 + 1;
-        if (m == 11 || m == 12){
-            d = d - 1;
-        }
-        f = birthDay + ((13*birthMonth - 1)/ 5) + d + (d / 4) + (c / 4) - 2 * c;
+int dayOfTheYear(int birthYear,int birthMonth,int birthDay) {
+    // using Zeller's rule
+    // int dayofbirth;
+    // cout << "Please enter your day of birth (1 for Monday, etc.): ";
+    // scanf("%d", &dayofbirth);
+    int refYear = 2000;
+    int daysdiff;
+    // int refMonth = 1;
+    // int refDay = 1;
+    // int refDow = 6;
+    cout << refYear << "\n";
+    cout << birthYear << "\n";
 
-        return abs(f % 7);
-
+    if (birthYear % 4 == 0) {
+        const int leapYear[] = {1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336};
+        daysdiff = leapYear[birthMonth - 1] + birthDay - 1;
+    }
+    else if (birthYear % 4 != 0) {
+    const int regYear[] = {1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335};
+        daysdiff = regYear[birthMonth - 1] + birthDay - 1;
+    }
+    if (refYear == birthYear) {
+        daysdiff -= 1;
     }
 
+    int yeardiff = birthYear - refYear;
+    if (yeardiff == 1) {
+        daysdiff += 365;
+    }
+    else {
+        while (yeardiff > 0) {
+            if ((yeardiff - 1) % 4 == 0 && ((yeardiff - 1) != 0)) {
+                daysdiff += 366;
+                yeardiff -= 1;
+            }
+            else {
+            daysdiff += 365;
+            yeardiff -= 1;
+            }
+        }
+    }
+    int x = daysdiff % 7;
+    // map numbers to proper weekdays
+    if (x == 0 || x == 1) {
+        x += 6;
+    }
+    else {
+        x -= 1;
+    }
+    return x;
+}
 
 int main() {
     // testAge();
@@ -290,7 +324,6 @@ int main() {
     int dayofbirth;
     cout << "Please enter your year and month of birth (dd/mm/yyyy): ";
     scanf("%d/%d/%d", &birthDay, &birthMonth, &birthYear);
-    dayofbirth = dayOfTheWeek(birthYear, birthMonth, birthDay);
-    cout << "You were born on " << dayofbirth << "\n" ;
-
+    dayofbirth = dayOfTheYear(birthYear, birthMonth, birthDay);
+    cout << "You were born on the " << dayofbirth << " day of the week\n" ;
 }
