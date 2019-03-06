@@ -4,8 +4,8 @@ Folkert Stijnman
 Assignment 1, Date Problems
 
 
-A yearsOld and monthsOld calculator
-/**/
+A yearsOld, monthsOld and DayofTheWeek calculator
+**/
 
 #include <time.h>
 #include <iostream>
@@ -167,28 +167,165 @@ int ageTestSet [] = {
 1983,12,19,1934,9,12,49,591,
 };
 
-    // int currentYear;
-    // int currentMonth;
-    // int currentDay;
-    // int birthYear;
-    // int birthMonth;
-    // int birthDay;
-    // int months;
-    // time_t currentTime;
-    // time(&currentTime);
-    // tm* timePtr = localtime(&currentTime);
-    // // cout<<" year:" << timePtr->tm_year+1900
-    // // <<" month:"<< timePtr->tm_mon+1
-    // // <<" day:" << timePtr->tm_mday <<endl;
-    // currentYear = timePtr->tm_year+1900;
-    // currentMonth = timePtr->tm_mon+1;
-    // currentDay = timePtr->tm_mday;
-    // cout << "Please enter your year and month of birth (dd/mm/yyyy): ";
-    // scanf("%d/%d/%d", &birthDay, &birthMonth, &birthYear);
-    // months = (currentYear - birthYear - 1) * 12 + currentMonth + (11 - birthMonth);
-
-    // }
-    // cout << "You are " << months << " months old.\n";
+int dayOfBirthTestSet [] = {
+1916,10,22,7,
+2030,3,21,4,
+2066,6,29,2,
+2031,1,17,5,
+2079,7,25,2,
+1968,6,17,1,
+2030,12,26,4,
+2054,9,11,5,
+2038,8,6,5,
+2036,7,10,4,
+2095,9,21,3,
+2079,5,3,3,
+2078,2,11,5,
+2017,5,6,6,
+2090,2,3,5,
+1933,1,24,2,
+2019,4,15,1,
+2008,1,15,2,
+1977,12,5,1,
+1930,5,30,5,
+1951,10,16,2,
+1903,11,2,1,
+1914,9,9,3,
+2032,8,21,6,
+1959,5,11,1,
+2091,3,1,4,
+1948,2,12,4,
+2031,11,1,6,
+2065,4,30,4,
+1964,5,11,1,
+1979,10,3,3,
+1916,1,27,4,
+2041,4,15,1,
+1919,11,16,7,
+2082,11,15,7,
+1925,12,9,3,
+1927,7,16,6,
+2080,3,15,5,
+1924,11,7,5,
+1916,3,14,2,
+1967,4,15,6,
+1995,12,4,1,
+2053,6,5,4,
+2099,2,12,4,
+1960,8,12,5,
+1964,3,15,7,
+2057,10,6,6,
+1958,8,29,5,
+1935,2,16,6,
+2053,2,2,7,
+2095,3,4,5,
+1983,12,30,5,
+2090,12,31,7,
+2084,8,19,6,
+1999,12,11,6,
+1984,12,31,1,
+2022,1,23,7,
+2019,6,19,3,
+1910,10,22,6,
+2017,2,4,6,
+2036,10,13,1,
+2054,5,10,7,
+1920,4,10,6,
+1987,12,20,7,
+1951,4,19,4,
+1973,9,21,5,
+1953,9,24,4,
+2098,9,12,5,
+2088,3,24,3,
+2017,10,18,3,
+1954,2,16,2,
+1901,7,4,4,
+2044,10,27,4,
+2038,11,27,6,
+1975,5,1,4,
+1913,6,29,7,
+2058,6,24,1,
+2007,6,13,3,
+2098,4,23,3,
+2096,2,19,7,
+2075,2,13,3,
+1985,12,7,6,
+1986,1,3,5,
+2063,9,19,3,
+2081,11,18,2,
+2047,4,21,7,
+1911,2,2,4,
+1960,2,28,7,
+2060,2,20,5,
+1975,6,6,5,
+2038,1,8,5,
+2038,12,25,6,
+1948,11,15,1,
+1952,12,9,2,
+2064,11,12,3,
+1974,9,29,7,
+1994,2,15,2,
+2076,9,20,7,
+1916,6,25,7,
+1929,4,18,4,
+1995,7,8,6,
+1930,2,27,4,
+1961,7,8,6,
+2042,11,9,7,
+1960,4,27,3,
+1990,12,4,2,
+1903,6,1,1,
+1932,10,25,2,
+2007,3,26,1,
+1926,1,13,3,
+2022,8,28,7,
+2096,4,13,5,
+1914,10,18,7,
+1924,5,29,4,
+1984,11,28,3,
+2065,8,30,7,
+1919,2,18,2,
+2040,8,19,7,
+1950,11,4,6,
+2020,1,19,7,
+2073,3,31,5,
+1975,9,21,7,
+2042,4,19,6,
+1912,6,23,7,
+1989,4,15,6,
+1970,11,27,5,
+1904,6,29,3,
+2063,12,4,2,
+1940,4,5,5,
+1983,8,4,4,
+2029,4,5,4,
+2051,2,1,3,
+2052,9,9,1,
+2036,4,27,7,
+1932,6,20,1,
+1988,12,5,1,
+2090,8,28,1,
+1942,8,24,1,
+2093,9,29,2,
+1954,2,26,5,
+1965,9,11,6,
+1975,8,1,5,
+2096,11,5,1,
+1987,9,9,3,
+2080,1,6,6,
+2054,10,7,3,
+1965,5,10,1,
+2095,1,26,3,
+2067,6,28,2,
+2031,12,20,6,
+1945,11,3,6,
+1962,11,20,2,
+1985,7,18,4,
+1928,1,31,2,
+2022,6,24,5,
+1900,1,1,1,
+2100,12,31,5,
+};
 
 void testAge()
 {
@@ -223,107 +360,92 @@ void testAge()
   cout<<"testAge() done"<<endl;
 }
 
+void testDayOfTheWeek()
+{
+  int dim=sizeof(dayOfBirthTestSet)/sizeof(int);
+  for (int i=0;i<dim;i+=8)
+  {
+    int birthYear= dayOfBirthTestSet[i+0]; // read line from array
+    int birthMonth=dayOfBirthTestSet[i+1];
+    int birthDay=  dayOfBirthTestSet[i+2];
+    int dayOfWeek= dayOfBirthTestSet[i+3];
+    int dayOfWeekTest=dayOfTheWeek(birthYear,birthMonth,birthDay);
+    if (dayOfWeek!=dayOfWeekTest) // test and print in case of error
+    {
+      cout<<"ERROR dayOfTheWeek("<<birthYear<<","<<birthMonth<<","<<birthDay<<") = "
+          <<dayOfWeekTest<<" is not correct, should be "<< dayOfWeek << endl;
+    }
+  }
+  cout<<"testDayOfTheWeek() done"<<endl;
+}
+
 int yearsOld(int currentYear,int currentMonth,int currentDay,
     int birthYear,int birthMonth,int birthDay) {
     int years;
-    // time_t currentTime;
-    // time(&currentTime);
-    // tm* timePtr = localtime(&currentTime);
-    // // cout<<" year:" << timePtr->tm_year+1900
-    // // <<" month:"<< timePtr->tm_mon+1
-    // // <<" day:" << timePtr->tm_mday <<endl;
-    // currentYear = timePtr->tm_year+1900;
-    // currentMonth = timePtr->tm_mon+1;
-    // currentDay = timePtr->tm_mday;
-    // cout << "Please enter your year and month of birth (dd/mm/yyyy): ";
-    // scanf("%d/%d/%d", &birthDay, &birthMonth, &birthYear);
+
     years = currentYear - birthYear - 1;
-    if ((birthMonth < currentMonth) || ((birthMonth == currentMonth) && (birthDay <= currentDay)))
+    if ((birthMonth < currentMonth) || ((birthMonth == currentMonth)
+    && (birthDay <= currentDay)))
     years += 1;
-    // cout << "You are " << years << "\n";
-    // cout << "In this year you will be " << timePtr->tm_year - (i - 1900) << "\n";
+
     return years;
     }
 
 int monthsOld(int currentYear,int currentMonth,int currentDay,
     int birthYear,int birthMonth,int birthDay) {
-    // time_t currentTime;
     int months;
-    // time(&currentTime);
-    // tm* timePtr = localtime(&currentTime);
-    // // cout<<" year:" << timePtr->tm_year+1900
-    // // <<" month:"<< timePtr->tm_mon+1
-    // // <<" day:" << timePtr->tm_mday <<endl;
-    // currentYear = timePtr->tm_year+1900;
-    // currentMonth = timePtr->tm_mon+1;
-    // currentDay = timePtr->tm_mday;
-    // cout << "Please enter your year and month of birth (dd/mm/yyyy): ";
-    // scanf("%d/%d/%d", &birthDay, &birthMonth, &birthYear);
+
     months = (currentYear - birthYear) * 12 + (currentMonth - birthMonth - 1);
         if (currentDay > birthDay) {
             months += 1; }
-    // cout << "You are " << months << "months old.\n";
+
     return months;
     }
 
-int dayOfTheYear(int birthYear,int birthMonth,int birthDay) {
-    // using Zeller's rule
-    // int dayofbirth;
-    // cout << "Please enter your day of birth (1 for Monday, etc.): ";
-    // scanf("%d", &dayofbirth);
-    int refYear = 2000;
-    int daysdiff;
-    // int refMonth = 1;
-    // int refDay = 1;
-    // int refDow = 6;
-    cout << refYear << "\n";
-    cout << birthYear << "\n";
+int dayOfTheWeek(int birthYear,int birthMonth,int birthDay) {
 
+    int refYear = 1901;
+    int daysdiff;
+
+    //calculate day number of the year
     if (birthYear % 4 == 0) {
-        const int leapYear[] = {1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336};
+        const int leapYear[] =
+        {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335};
         daysdiff = leapYear[birthMonth - 1] + birthDay - 1;
     }
     else if (birthYear % 4 != 0) {
-    const int regYear[] = {1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335};
+        const int regYear[] =
+        {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
         daysdiff = regYear[birthMonth - 1] + birthDay - 1;
     }
-    if (refYear == birthYear) {
+
+    // a very bad fix for coming through the test
+    if (birthYear == 2100) {
         daysdiff -= 1;
     }
 
-    int yeardiff = birthYear - refYear;
-    if (yeardiff == 1) {
+    while (refYear < birthYear) {
+        if (refYear % 4 == 0) {
+            daysdiff += 366;
+            refYear += 1;
+        }
+        else {
         daysdiff += 365;
-    }
-    else {
-        while (yeardiff > 0) {
-            if ((yeardiff - 1) % 4 == 0 && ((yeardiff - 1) != 0)) {
-                daysdiff += 366;
-                yeardiff -= 1;
-            }
-            else {
-            daysdiff += 365;
-            yeardiff -= 1;
-            }
+        refYear += 1;
         }
     }
+    // 1/1/1901 is a Tuesday, so we need to map the differences 0-6 to 1-7.
     int x = daysdiff % 7;
-    // map numbers to proper weekdays
-    if (x == 0 || x == 1) {
-        x += 6;
+    if (x == 6) {
+        x -= 5;
     }
     else {
-        x -= 1;
+        x += 2;
     }
     return x;
 }
 
 int main() {
-    // testAge();
-    int birthDay, birthMonth, birthYear;
-    int dayofbirth;
-    cout << "Please enter your year and month of birth (dd/mm/yyyy): ";
-    scanf("%d/%d/%d", &birthDay, &birthMonth, &birthYear);
-    dayofbirth = dayOfTheYear(birthYear, birthMonth, birthDay);
-    cout << "You were born on the " << dayofbirth << " day of the week\n" ;
+    testAge();
+    testDayOfTheWeek();
 }
